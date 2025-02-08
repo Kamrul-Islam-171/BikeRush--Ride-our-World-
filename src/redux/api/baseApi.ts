@@ -37,7 +37,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
         toast.error(result.data?.data?.message)
     }
     else if(result.error?.status === 'FETCH_ERROR') {
-        toast.error('Server is low...')
+        toast.error('Server Down...')
     }
     else if(result.error?.status === 401) {
         const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
