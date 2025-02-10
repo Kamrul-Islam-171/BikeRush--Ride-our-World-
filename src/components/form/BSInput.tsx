@@ -7,23 +7,28 @@ type TInputProps = {
   type: string;
   disabled?: boolean;
   rules?: object;
+  accept?: string; // Add accept prop for file inputs
 };
 
-const BSInput = ({ name, label, type, disabled, rules }: TInputProps) => {
+const BSInput = ({ name, label, type, disabled, rules, accept }: TInputProps) => {
   return (
-    <div >
+    <div>
       <Controller
         name={name}
         rules={rules}
-        render={({ field, fieldState: { error } }) => (
-          <Form.Item
-            
-            label={label}
-            labelCol={{ span: 6 }}
-            // validateStatus={error ? "error" : ""}
-            // help={error ? error.message : ""}
-          >
-            <Input type={type} id={name} {...field} disabled={disabled} />
+        render={({ field: { onChange, value, ...field }, fieldState: { error } }) => (
+          <Form.Item label={label} labelCol={{ span: 6 }}>
+            {type === "file" ? (
+              <input
+                type="file"
+                id={name}
+                accept={accept} // Apply accept prop
+                onChange={(e) => onChange(e.target.files)} // Handle file selection
+                disabled={disabled}
+              />
+            ) : (
+              <Input type={type} id={name} value={value ?? ""} onChange={onChange} disabled={disabled} />
+            )}
             {error && <small style={{ color: "red" }}>{error.message}</small>}
           </Form.Item>
         )}
