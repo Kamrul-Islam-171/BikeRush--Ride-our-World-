@@ -5,16 +5,19 @@ import { Button, Col, Flex, Row } from "antd";
 import BSSelect from "../../components/form/BSSelect";
 import BSTextArea from "../../components/form/BSTestArea";
 import axios from "axios";
+import { toast } from "sonner";
+import { useAddProductMutation } from "../../redux/features/products/product.api";
 
 const category = ["Mountain", "Road", "Hybrid", "Electric"];
 
 const CreateNewProduct = () => {
+  const [addNewProduct] = useAddProductMutation()
   const categoryOptions = category?.map((item) => ({
     value: item,
     label: item,
   }));
   const onsubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    const toastId = toast.loading('Product is adding...') 
     try {
       const formData = new FormData();
       formData.append("file", data.image[0]);
@@ -22,11 +25,31 @@ const CreateNewProduct = () => {
       formData.append("cloud_name", "dtp5fwvg9");
 
       const response = await axios.post(`https://api.cloudinary.com/v1_1/dtp5fwvg9/image/upload`, formData);
-      console.log(response);
       const imageUrl = response.data.secure_url;
-      console.log(imageUrl)
+
+      const productData = {
+        name: data.name,
+        brand: data.brand,
+        image: imageUrl,
+        price: Number(data.price),
+        category: data.category,
+        description: data.description,
+        quantity: Number(data.quantity),
+        inStock: true
+      }
+      const res = await addNewProduct(productData);
+      if(res.data) {
+
+        toast.success('Producted Added Successfully!', {id:toastId, duration: 2000})
+      }
+      else {
+        toast.error('Please Try again...!', {id:toastId, duration: 2000})
+      }
+      
+      
     } catch (err) {
       console.log(err)
+      toast.error('Please Try again...!', {id:toastId, duration: 2000})
     }
   };
   
