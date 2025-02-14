@@ -31,7 +31,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     let result = await baseQuery(args, api, extraOptions);
 
     if(result.error?.status === 404) {
-        toast.error(result.data?.data?.message)
+        
+        toast.error(result.data?.data?.message);
     }
     else if(result.error?.status === 403) {
         toast.error(result.data?.data?.message)
@@ -65,6 +66,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["product", "deleteProduct", "createProduct"],
+  tagTypes: ["product", "deleteProduct", "createProduct", "customerStatus"],
   endpoints: () => ({}),
 });

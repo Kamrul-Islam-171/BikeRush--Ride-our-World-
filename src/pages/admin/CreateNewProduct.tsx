@@ -120,7 +120,7 @@ const CreateNewProduct = () => {
           />
 
           <div className="flex justify-end">
-            <Button htmlType="submit" type="primary" className=" ">
+            <Button htmlType="submit" className=" flex bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium shadow-md">
               Submit
             </Button>
           </div>

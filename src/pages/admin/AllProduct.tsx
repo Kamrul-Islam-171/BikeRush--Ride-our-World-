@@ -11,12 +11,25 @@ import BSForm from "../../components/form/BSForm";
 import BSInput from "../../components/form/BSInput";
 import { toast } from "sonner";
 import Loading from "../../components/loading/Loading";
-import { CheckOutlined, CloseOutlined, DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  CloseOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+
 
 const AllProducts = () => {
-  const { data: productData, isFetching } = useGetAllProductQuery(undefined);
-  const meta = productData?.data?.meta;
+  
   const [page, setPage] = useState(1);
+  const { data: productData, isFetching } = useGetAllProductQuery([
+    { name: "page", value: page },
+    {
+      name: "limit",
+      value: 6,
+    },
+  ]);
+  const meta = productData?.data?.meta;
 
   const allProductsData = (productData as TProductResponse)?.data?.result;
   //   console.log(allProductsData)
@@ -79,7 +92,7 @@ const AllProducts = () => {
         <div className="w-20 h-1 bg-indigo-500 mx-auto mt-3 rounded-full"></div>
       </div>
 
-      {isFetching && (<Loading></Loading>)}
+      {isFetching && <Loading></Loading>}
       {!isFetching && (
         <div className="mt-14">
           <Table
@@ -104,7 +117,6 @@ const AllProducts = () => {
 };
 
 const UpdateProductModal = ({ product }) => {
-
   const [productUpdate] = useUpdateProductMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const defaultValues = {
@@ -193,11 +205,10 @@ const UpdateProductModal = ({ product }) => {
   );
 };
 
-const ConfirmDelete = ({product}) => {
- 
+const ConfirmDelete = ({ product }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteProduct] = useDeleteProductMutation();
-  
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -206,24 +217,20 @@ const ConfirmDelete = ({product}) => {
     setIsModalOpen(false);
   };
   const handleDelete = async () => {
-
-    
     const toastId = toast.loading("Loading...");
     try {
       const res = await deleteProduct(product.key);
       console.log("res = ", res);
-      if(res?.data) {
-        console.log("hell")
-        toast.success(res?.data?.message, {id: toastId, duration: 2000})
-      }
-      else {
-      toast.error("Something went wrong", { id: toastId, duration: 2000 });
+      if (res?.data) {
+        console.log("hell");
+        toast.success(res?.data?.message, { id: toastId, duration: 2000 });
+      } else {
+        toast.error("Something went wrong", { id: toastId, duration: 2000 });
       }
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong", { id: toastId, duration: 2000 });
     }
-    
   };
 
   return (
@@ -249,14 +256,22 @@ const ConfirmDelete = ({product}) => {
       >
         <div className="flex flex-col items-center text-center p-4">
           <p className="text-gray-600 mb-4">
-            Are you sure you want to delete <strong className="text-indigo-600">{product?.name}</strong>? This action cannot be undone.
+            Are you sure you want to delete{" "}
+            <strong className="text-indigo-600">{product?.name}</strong>? This
+            action cannot be undone.
           </p>
           <div className="flex gap-4">
-            <Button onClick={handleCancel} className="flex items-center gap-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white font-medium shadow-md">
+            <Button
+              onClick={handleCancel}
+              className="flex items-center gap-2 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white font-medium shadow-md"
+            >
               <CloseOutlined />
               No
             </Button>
-            <Button onClick={handleDelete} className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium shadow-md">
+            <Button
+              onClick={handleDelete}
+              className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium shadow-md"
+            >
               <CheckOutlined />
               Yes
             </Button>
@@ -265,6 +280,6 @@ const ConfirmDelete = ({product}) => {
       </Modal>
     </div>
   );
-}
+};
 
 export default AllProducts;

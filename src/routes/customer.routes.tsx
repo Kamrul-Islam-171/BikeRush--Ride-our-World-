@@ -1,7 +1,7 @@
 import AllOrders from "../pages/customar/AllOrders";
 import MyOrders from "../pages/customar/MyOrders";
 
-console.log("i am not");
+
 export const customerRoutes = [
   {
     index: true,

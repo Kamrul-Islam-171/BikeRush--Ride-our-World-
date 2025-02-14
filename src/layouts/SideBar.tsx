@@ -7,15 +7,10 @@ import { useAppSelector } from "../redux/features/hook";
 import { selectCurrenttoken } from "../redux/features/auth/AuthSlice";
 import { VerifyToken } from "../utils/verifyToken";
 import { AdminSidebarItems } from "../routes/adminSidebarRoutesItesm";
+import { TUserRole } from "../types/user";
 
 const {  Sider } = Layout;
 
-export type TUserRole = {
-  id: string;
-  role:string;
-  iat: number;
-  exp:number;
-}
 
 const SideBar = () => {
 

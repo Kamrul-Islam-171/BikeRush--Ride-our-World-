@@ -12,6 +12,7 @@ import { VerifyToken } from "../utils/verifyToken";
 import { selectCurrenttoken } from "../redux/features/auth/AuthSlice";
 import { customerRoutes } from "./customer.routes";
 import { adminRoutes } from "./admin.routes";
+import ProtextedRoute from "../layouts/ProtextedRoute";
 
 let user;
 const DashboardRoutes = () => {
@@ -51,12 +52,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/customer",
-    element: <SideBar></SideBar>,
+    element: <ProtextedRoute role="customer"><SideBar></SideBar></ProtextedRoute>,
     children: customerRoutes,
   },
   {
     path: "/admin",
-    element: <SideBar></SideBar>,
+    element: <ProtextedRoute role="admin"><SideBar></SideBar></ProtextedRoute>,
     children: adminRoutes,
   },
 ]);
