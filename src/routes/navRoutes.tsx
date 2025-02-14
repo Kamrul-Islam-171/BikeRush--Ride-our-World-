@@ -1,6 +1,6 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import About from "../pages/about/About";
-import AllProducts from "../pages/allProducts/AllProducts";
+import AllProducts from "../pages/allProducts/AllProductLists";
 import HomeContent from "../pages/home/HomeContent";
 import HomePage from "../pages/home/HomePage";
 import Login from "../pages/login/Login";
@@ -13,16 +13,13 @@ import { selectCurrenttoken } from "../redux/features/auth/AuthSlice";
 import { customerRoutes } from "./customer.routes";
 import { adminRoutes } from "./admin.routes";
 
-let user ;
+let user;
 const DashboardRoutes = () => {
-  
   const token = useAppSelector(selectCurrenttoken);
   user = token ? VerifyToken(token) : null;
-  console.log(user)
+  console.log(user);
 
-  return (
-    <SideBar></SideBar>
-  );
+  return <SideBar></SideBar>;
 };
 
 export const router = createBrowserRouter([
@@ -55,13 +52,11 @@ export const router = createBrowserRouter([
   {
     path: "/customer",
     element: <SideBar></SideBar>,
-    children: customerRoutes
+    children: customerRoutes,
   },
   {
     path: "/admin",
     element: <SideBar></SideBar>,
-    children: adminRoutes
+    children: adminRoutes,
   },
-  
 ]);
-

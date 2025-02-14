@@ -1,16 +1,22 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../../components/navbar/NavBar";
+
+import Footer from "../../components/footer/Footer";
+import NavigationBar from "../../components/navbar/NavigationBar";
 
 const HomePage = () => {
   return (
     <div>
+      
       <div>
-        <NavBar></NavBar>
+        <NavigationBar></NavigationBar>
       </div>
-      <div className="max-w-[1600px] mx-auto mt-[64px]">
+      <div className="max-w-[1600px] mx-auto mt-[64px] min-h-screen">
         <div className="ml-3 mr-3">
           <Outlet></Outlet>
         </div>
+      </div>
+      <div>
+        <Footer></Footer>
       </div>
     </div>
   );

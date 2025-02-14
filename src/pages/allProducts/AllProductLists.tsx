@@ -8,6 +8,7 @@ import { TQueryParams } from "../../types/global";
 import { productItem } from "../../types/product";
 import Loading from "../../components/loading/Loading";
 import NotFound from "../NotFoundPage/NotFound";
+import ProductsCard from "./ProductsCard";
 const { Option } = Select;
 type SearchProps = GetProps<typeof Input.Search>;
 const { Search } = Input;
@@ -33,7 +34,7 @@ const AllProducts = () => {
     { name: "page", value: page },
     {
       name: "limit",
-      value: 3,
+      value: 4,
     },
     ...(category ? [{ name: "category", value: category }] : []),
     ...(availability ? [{ name: "inStock", value: availability }] : []),
@@ -59,6 +60,7 @@ const AllProducts = () => {
     if (value !== values) {
       setLoading(true);
     }
+    setPage(1);
     setValues(value);
     setParams([{ name: "search", value: value }]);
   };
@@ -67,12 +69,14 @@ const AllProducts = () => {
     if (value !== category) {
       setLoading(true);
     }
+    setPage(1);
     setCategory(value);
   };
   const onSelectAvailable = (value: boolean) => {
     if (value !== availability) {
       setLoading(true);
     }
+    setPage(1);
     setAvailability(value);
   };
 
@@ -80,9 +84,9 @@ const AllProducts = () => {
     if (value !== priceValue) {
       setLoading(true);
     }
-
+    setPage(1);
     const parseValue = value.split("-").map(Number);
-    console.log(parseValue);
+    // console.log(parseValue);
     setPrice(parseValue as [number, number]);
     setPriceValue(value);
   };
@@ -148,18 +152,19 @@ const AllProducts = () => {
         </div>
       </div>
 
-      {loading || (isFetching && <Loading></Loading>)}
+      {(loading || isFetching) && <Loading></Loading>}
 
       {!loading && (
-        <div>
+        <div className="flex justify-center">
           {allProductsData && allProductsData.length > 0 ? (
-            <div>
+            <div className="">
               <div className="mt-16 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 m-auto max-w-[1200px] w-full">
                 {allProductsData?.map((item: productItem, index: number) => (
-                  <ProductCardWithAnimation product={item} key={index} />
+                  
+                  <ProductsCard product={item} key={index} />
                 ))}
               </div>
-              <div className=" mt-9 flex justify-center">
+              <div className=" mt-9 flex justify-center mb-14">
                 <Pagination
                   current={page}
                   onChange={(value) => setPage(value)}
