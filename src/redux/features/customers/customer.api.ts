@@ -23,6 +23,14 @@ const customerApi = baseApi.injectEndpoints({
             },
             providesTags: ["customerStatus"]
         }),
+        getSingleCustomer: builder.query({
+            query: (email) => {
+                return {
+                    url: `/users/${email}`,
+                    method: 'GET',
+                }
+            },
+        }),
 
         blockUnblockCustomer: builder.mutation({
             query: ({id, queryParams}) => {
@@ -42,9 +50,20 @@ const customerApi = baseApi.injectEndpoints({
             },
             invalidatesTags:["customerStatus"]
         }),
+        changePassword: builder.mutation({
+            query: (data) => {
+                // console.log(data)
+                return {
+                    url: `/users/change-password`,
+                    method: 'POST',
+                    body: data
+                }
+            },
+        }),
+
 
         
     })
 })
 
-export const {useGetAllCustomersQuery, useBlockUnblockCustomerMutation} = customerApi;
+export const {useGetAllCustomersQuery, useBlockUnblockCustomerMutation, useGetSingleCustomerQuery, useChangePasswordMutation} = customerApi;

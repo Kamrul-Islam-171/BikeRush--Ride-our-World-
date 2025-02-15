@@ -8,7 +8,7 @@ const productApi = baseApi.injectEndpoints({
         
         getAllProduct: builder.query({
             query: (args) => {
-                console.log(args);
+                // console.log(args);
                 const params = new URLSearchParams();
                 if(args) {
                     args.forEach((item : TQueryParams) => {
@@ -34,13 +34,22 @@ const productApi = baseApi.injectEndpoints({
             invalidatesTags:["createProduct"]
         }),
 
+        getSingleProduct: builder.query({
+            query: (id) => ({
+            
+                url: `/product/${id}`,
+                method: "GET",
+            }),
+            providesTags:["singleProduct"]
+        }),
+
         updateProduct: builder.mutation({
             query: (args) => ({
                 url: `/product/${args.id}`,
                 method: "PATCH",
                 body: args.data
             }),
-            invalidatesTags: ["product"]
+            invalidatesTags: ["product", "singleProduct"]
         }),
         deleteProduct: builder.mutation({
             query: (id) => ({
@@ -51,7 +60,8 @@ const productApi = baseApi.injectEndpoints({
             invalidatesTags: ["deleteProduct"]
         }),
         
+        
     })
 })
 
-export const {useAddProductMutation, useGetAllProductQuery, useUpdateProductMutation, useDeleteProductMutation} = productApi;
+export const {useAddProductMutation, useGetAllProductQuery, useUpdateProductMutation, useDeleteProductMutation, useGetSingleProductQuery} = productApi;

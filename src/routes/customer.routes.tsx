@@ -1,5 +1,7 @@
 import AllOrders from "../pages/customar/AllOrders";
 import MyOrders from "../pages/customar/MyOrders";
+import CustomerProfile from "../pages/customar/Profile";
+
 
 
 export const customerRoutes = [
@@ -14,5 +16,9 @@ export const customerRoutes = [
   {
     path: "customer/all-orders",
     element: <AllOrders></AllOrders>,
+  },
+  {
+    path: "customer/profile",
+    element: <CustomerProfile></CustomerProfile>,
   },
 ];

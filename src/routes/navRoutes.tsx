@@ -13,6 +13,7 @@ import { selectCurrenttoken } from "../redux/features/auth/AuthSlice";
 import { customerRoutes } from "./customer.routes";
 import { adminRoutes } from "./admin.routes";
 import ProtextedRoute from "../layouts/ProtextedRoute";
+import ProductDetails from "../pages/allProducts/ProductDetails";
 
 let user;
 const DashboardRoutes = () => {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
         path: "about",
         element: <About></About>,
       },
+      {
+        path: "/product/:id",
+        element: <ProductDetails></ProductDetails>
+      }
     ],
   },
   {

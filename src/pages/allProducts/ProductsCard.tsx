@@ -1,6 +1,7 @@
 import { Card, Button } from "antd";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 import { productItem } from "../../types/product";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -9,7 +10,7 @@ interface TproductItemProps {
 }
 
 const ProductsCard = ({ product} : TproductItemProps) => {
-  const { name, price, inStock, image, category } = product;
+  const { name, price, inStock, image, category, _id } = product;
   const isInStock = inStock;
 
   return (
@@ -61,7 +62,7 @@ const ProductsCard = ({ product} : TproductItemProps) => {
               icon={<EyeOutlined />}
               className="flex-1 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white font-medium shadow-md"
             >
-              View Details
+              <NavLink to={`/product/${_id}`}>View Details</NavLink>
             </Button>
           </div>
         </div>

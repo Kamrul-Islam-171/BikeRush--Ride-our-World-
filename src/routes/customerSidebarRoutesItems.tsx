@@ -32,6 +32,11 @@ export const CustomarSidebarItems = (role: string) => {
       ]
     },
     {
+      key: "Profile",
+      icon: React.createElement(UserOutlined),
+      label: <NavLink to={`${role}/profile`}>Profile</NavLink>,
+    },
+    {
         key: "Home",
         icon: React.createElement(HomeOutlined),
         label: <NavLink to={`/`}>Home</NavLink>,
