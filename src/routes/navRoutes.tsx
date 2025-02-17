@@ -5,7 +5,7 @@ import HomeContent from "../pages/home/HomeContent";
 import HomePage from "../pages/home/HomePage";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
-import SideBar, { TUserRole } from "../layouts/SideBar";
+import SideBar from "../layouts/SideBar";
 
 import { useAppSelector } from "../redux/features/hook";
 import { VerifyToken } from "../utils/verifyToken";
@@ -14,6 +14,10 @@ import { customerRoutes } from "./customer.routes";
 import { adminRoutes } from "./admin.routes";
 import ProtextedRoute from "../layouts/ProtextedRoute";
 import ProductDetails from "../pages/allProducts/ProductDetails";
+import CheckOut from "../pages/allProducts/CheckOut";
+import Success from "../pages/allProducts/Success";
+import Failed from "../pages/allProducts/Failed";
+import Cancel from "../pages/allProducts/Cancel";
 
 let user;
 const DashboardRoutes = () => {
@@ -65,4 +69,20 @@ export const router = createBrowserRouter([
     element: <ProtextedRoute role="admin"><SideBar></SideBar></ProtextedRoute>,
     children: adminRoutes,
   },
+  {
+    path:"/customer/checkout",
+    element: <ProtextedRoute role="customer"><CheckOut></CheckOut></ProtextedRoute>
+  },
+  {
+    path:"/success",
+    element: <ProtextedRoute role="customer"><Success></Success></ProtextedRoute>
+  },
+  {
+    path:"/fail",
+    element: <ProtextedRoute role="customer"><Failed></Failed></ProtextedRoute>
+  },
+  {
+    path:"/cancel",
+    element: <ProtextedRoute role="customer"><Cancel></Cancel></ProtextedRoute>
+  }
 ]);

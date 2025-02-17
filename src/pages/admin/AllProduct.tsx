@@ -134,9 +134,11 @@ const UpdateProductModal = ({ product }) => {
     const toastId = toast.loading("Loading...");
     // console.log(data);
     try {
+      
       const updatedData = {
         price: Number(data?.price),
         quantity: Number(data?.quantity),
+        inStock: Number(data?.quantity) > 0 ? true : false,
       };
       const res = await productUpdate({ id: product.key, data: updatedData });
       // console.log(res);;

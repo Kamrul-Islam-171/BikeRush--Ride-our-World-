@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../redux/features/products/product.api";
 import Loading from "../../components/loading/Loading";
 import { Button, Card, Tag } from "antd";
@@ -10,6 +10,11 @@ const ProductDetails = () => {
     const {id} = useParams();
     const {data:productData, isFetching} = useGetSingleProductQuery(id);
     const product = productData?.data;
+    console.log(product)
+    
+    const filteredField = {id: product?._id, name:product?.name, image: product?.image, price:product?.price};
+    // console.log(filteredField)
+  
 
     if(isFetching) {
         return <Loading></Loading>
@@ -50,9 +55,9 @@ const ProductDetails = () => {
                                 icon={<ShoppingCartOutlined />} 
                                 size="large"
                                 className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium shadow-md"
-                                disabled={!product?.inStock}
+                                disabled={product?.quantity <= 0}
                             >
-                                Buy Now
+                                <Link to={'/customer/checkout'} state={{product: filteredField}}>Buy Now</Link>
                             </Button>
                         </div>
                     </div>

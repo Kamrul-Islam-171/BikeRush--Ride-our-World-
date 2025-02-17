@@ -1,7 +1,7 @@
 import { Card, Button } from "antd";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 import { productItem } from "../../types/product";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 
@@ -12,6 +12,9 @@ interface TproductItemProps {
 const ProductsCard = ({ product} : TproductItemProps) => {
   const { name, price, inStock, image, category, _id } = product;
   const isInStock = inStock;
+  const filteredField = {
+    id: _id, name, image, price
+  }
 
   return (
     <div className="relative w-full max-w-xs md:max-w-sm rounded-2xl">
@@ -52,9 +55,9 @@ const ProductsCard = ({ product} : TproductItemProps) => {
               type="primary"
               icon={<ShoppingCartOutlined />}
               className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium shadow-md"
-              disabled={!isInStock} // Disable if out of stock
+              disabled={product?.quantity <= 0} // Disable if out of stock
             >
-              Buy Now
+              <Link to={'/customer/checkout'} state={{product:filteredField}}>Buy Now</Link>
             </Button>
 
             <Button
@@ -62,7 +65,7 @@ const ProductsCard = ({ product} : TproductItemProps) => {
               icon={<EyeOutlined />}
               className="flex-1 border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white font-medium shadow-md"
             >
-              <NavLink to={`/product/${_id}`}>View Details</NavLink>
+              <Link to={`/product/${_id}`}>View Details</Link>
             </Button>
           </div>
         </div>
