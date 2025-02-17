@@ -1,13 +1,25 @@
 import React from "react";
-import { HomeOutlined, UserOutlined, CheckCircleOutlined, ProductOutlined, PlusCircleOutlined, DatabaseOutlined, TeamOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  UserOutlined,
+  CheckCircleOutlined,
+  ProductOutlined,
+  PlusCircleOutlined,
+  DatabaseOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 
 export const AdminSidebarItems = (role: string) => {
   const adminRoutesItems = [
     {
-        key: "Logo",
-        // icon: React.createElement(UserOutlined),
-        label: <NavLink to={`/`} className='text-3xl font-bold'>Logo</NavLink>,
+      key: "Logo",
+      // icon: React.createElement(UserOutlined),
+      label: (
+        <NavLink to={`/`} className="text-3xl font-bold">
+         BikeRush
+        </NavLink>
+      ),
     },
     // {
     //   key: "My Orders",
@@ -32,31 +44,31 @@ export const AdminSidebarItems = (role: string) => {
     //   ]
     // },
     {
-      key:"Manage Product",
+      key: "Manage Product",
       icon: React.createElement(ProductOutlined),
-      label:"Manage Product",
+      label: "Manage Product",
       children: [
         {
-          key:"Create",
+          key: "Create",
           icon: <PlusCircleOutlined />,
           label: <NavLink to={`all-new-product`}>Add New</NavLink>,
         },
         {
-          key:"All Products",
+          key: "All Products",
           icon: <DatabaseOutlined />,
-          label:<NavLink to={`all-products`}>All Products</NavLink>,
-        }
-      ]
+          label: <NavLink to={`all-products`}>All Products</NavLink>,
+        },
+      ],
     },
     {
-        key: "All Customers",
-        icon: <TeamOutlined />,
-        label: <NavLink to={`all-customers`}>All Customers</NavLink>,
+      key: "All Customers",
+      icon: <TeamOutlined />,
+      label: <NavLink to={`all-customers`}>All Customers</NavLink>,
     },
     {
-        key: "Home",
-        icon: React.createElement(HomeOutlined),
-        label: <NavLink to={`/`}>Home</NavLink>,
+      key: "Home",
+      icon: React.createElement(HomeOutlined),
+      label: <NavLink to={`/`}>Home</NavLink>,
     },
   ];
   return adminRoutesItems;

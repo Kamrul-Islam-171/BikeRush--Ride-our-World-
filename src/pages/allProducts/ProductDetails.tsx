@@ -10,7 +10,7 @@ const ProductDetails = () => {
     const {id} = useParams();
     const {data:productData, isFetching} = useGetSingleProductQuery(id);
     const product = productData?.data;
-    console.log(product)
+    // console.log(product)
     
     const filteredField = {id: product?._id, name:product?.name, image: product?.image, price:product?.price};
     // console.log(filteredField)

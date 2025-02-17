@@ -10,7 +10,7 @@ const HomePage = () => {
       <div>
         <NavigationBar></NavigationBar>
       </div>
-      <div className="max-w-[1600px] mx-auto mt-[64px] min-h-screen">
+      <div className="max-w-[1600px] mx-auto mt-10 min-h-screen">
         <div className="ml-3 mr-3">
           <Outlet></Outlet>
         </div>

@@ -35,7 +35,12 @@ const NavigationBar = () => {
 
   return (
     <nav className="flex items-center justify-between bg-gray-900 text-white p-4 shadow-md">
-      <div className="text-2xl font-bold text-indigo-400">YourLogo</div>
+      <div className="flex items-center gap-1">
+        <div className="w-[40px] h-[40px]">
+        <img src="https://res.cloudinary.com/dtp5fwvg9/image/upload/v1739806738/bikerush_evxj9d.png" alt="" />
+        </div>
+      <div className="text-2xl font-bold text-indigo-400">Bike<span className="text-white">Rush</span></div>
+      </div>
 
       <div className="block md:hidden">
         <MenuOutlined

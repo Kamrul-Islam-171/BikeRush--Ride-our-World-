@@ -1,7 +1,17 @@
+
 import { useLocation } from "react-router-dom";
-import { Form, Input, Button, Card } from "antd";
+import { Form, Input, Button, Card, Select } from "antd";
 import { useCreatePaymentMutation } from "../../redux/features/products/product.api";
 import { toast } from "sonner";
+import { useState } from "react";
+import { useAppSelector } from "../../redux/features/hook";
+import { selectCurrenttoken } from "../../redux/features/auth/AuthSlice";
+import { VerifyToken } from "../../utils/verifyToken";
+import { JwtPayload } from "jwt-decode";
+
+interface CustomJwtPayload extends JwtPayload {
+  email: string;
+}
 
 interface Product {
   id: string;
@@ -14,13 +24,24 @@ const CheckOut: React.FC = () => {
   const location = useLocation();
   const product: Product | undefined = location.state?.product;
   const [createPayment] = useCreatePaymentMutation();
+  const [totalPrice, setTotalPrice] = useState(product?.price);
+  const [form] = Form.useForm();
 
-  const defaultValues = {
-    name: "Kamal", 
-    email: "kamal@gmail.com", 
-    address: "123 Main Street, City, Country", 
+  let user : CustomJwtPayload | null = null;
+  const token = useAppSelector(selectCurrenttoken);
+  if(token) {
+    user = VerifyToken(token) as CustomJwtPayload;
   }
-
+  
+  
+  const defaultValues = {
+    name: "Kamal",
+    email: user?.email,
+    address: "123 Main Street, City, Country",
+    paymentMethod: "USD",
+    totalPrice: totalPrice,
+  };
+  
   if (!product) {
     return (
       <p className="text-center text-red-500 text-lg mt-10">
@@ -31,12 +52,13 @@ const CheckOut: React.FC = () => {
 
   const { id, name, image, price } = product;
 
-  const onFinish = async(values: any) => {
+   const onFinish = async(values: any) => {
+    //  console.log("Order placed:", { ...values, productId: id });
     const toastId = toast.loading('Please wait...');
     try {
-    //   console.log("Order placed:", { ...values, productId: id });
       const orderInfo = {
         ...values,
+        totalPrice:Number(values.totalPrice), 
         productId: id,
       };
       const res = await createPayment(orderInfo);
@@ -50,6 +72,18 @@ const CheckOut: React.FC = () => {
     } catch (err) {
         console.log(err);
         toast.error('Someting went wrong!', {id: toastId, duration: 2000})
+    }
+  };
+
+  const handleSelect = (value: string) => {
+    console.log(value);
+    if (value === "BDT") {
+      const priceInBDT:number = parseInt((product?.price * 83.18).toString());
+      setTotalPrice(priceInBDT);
+      form.setFieldsValue({ totalPrice: priceInBDT });
+    } else {
+      setTotalPrice(product?.price);
+      form.setFieldsValue({ totalPrice: product?.price });
     }
   };
 
@@ -76,56 +110,38 @@ const CheckOut: React.FC = () => {
           <h2 className="text-2xl font-semibold text-indigo-600 mb-6 text-center">
             Shipping Information
           </h2>
-          <Form layout="vertical" onFinish={onFinish} className="space-y-4" initialValues={defaultValues}>
-            <Form.Item
-              label="Full Name"
-              name="name"
-              rules={[
-                { required: true, message: "Please enter your full name" },
-              ]}
-            >
-              <Input
-                size="large"
-                placeholder="Enter your full name"
-                className="rounded-lg"
-              />
+          <Form
+            layout="vertical"
+            onFinish={onFinish}
+            className="space-y-4"
+            initialValues={defaultValues}
+            form={form}
+          >
+            <Form.Item label="Full Name" name="name" rules={[{ required: true, message: "Please enter your full name" }]}>
+              <Input size="large" placeholder="Enter your full name" className="rounded-lg" />
             </Form.Item>
 
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                { required: true, message: "Please enter your email" },
-                { type: "email", message: "Enter a valid email" },
-              ]}
-            >
-              <Input
-                type="email"
-                size="large"
-                placeholder="Enter your email"
-                className="rounded-lg"
-              />
+            <Form.Item label="Email" name="email"  rules={[{ required: true, message: "Please enter your email" }, { type: "email", message: "Enter a valid email" }]}>
+              <Input disabled type="email" size="large"  placeholder="Enter your email" className="rounded-lg" />
             </Form.Item>
 
-            <Form.Item
-              label="Address"
-              name="address"
-              rules={[{ required: true, message: "Please enter your address" }]}
-            >
-              <Input.TextArea
-                rows={3}
-                placeholder="Enter your shipping address"
-                className="rounded-lg"
-              />
+            <Form.Item label="Address" name="address" rules={[{ required: true, message: "Please enter your address" }]}>
+              <Input.TextArea rows={3} placeholder="Enter your shipping address" className="rounded-lg" />
+            </Form.Item>
+
+            <Form.Item label="Total Price" name="totalPrice">
+              <Input disabled className="rounded-lg" />
+            </Form.Item>
+
+            <Form.Item label="Payment Method" name="paymentMethod" rules={[{ required: true, message: "Please select a payment method" }]}>
+              <Select size="large" onChange={handleSelect}>
+                <Select.Option value="BDT">BDT</Select.Option>
+                <Select.Option value="USD">USD</Select.Option>
+              </Select>
             </Form.Item>
 
             <Form.Item className="text-center">
-              <Button
-                // type="primary"
-                htmlType="submit"
-                size="large"
-                className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium shadow-md rounded-lg"
-              >
+              <Button htmlType="submit" size="large" className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium shadow-md rounded-lg">
                 Place Order
               </Button>
             </Form.Item>
