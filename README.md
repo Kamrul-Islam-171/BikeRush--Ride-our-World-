@@ -3,6 +3,8 @@
 ## 🚴 About BikeRush
 **BikeRush** is a robust and secure e-commerce platform built for bike enthusiasts. This web application follows a **role-based** access system, allowing **admins** to manage the platform efficiently while providing **customers** with a seamless shopping experience.
 
+live Link : https://bikerushdotcom.web.app/
+
 ## ✨ Features
 ### 🔹 **Admin Features**
 - Manage products (add, update, delete).
@@ -37,3 +39,10 @@ Ensure you have the following installed:
    ```sh
    git clone https://github.com/Kamrul-Islam-171/bike-store-front-end-L2--A4-
    cd bike-store-front-end-L2--A4
+2. Install dependencies:
+   ```sh
+   npm install
+3. Run the development server:
+   ```sh
+   npm run dev
+4. Access the application at http://localhost:5173.
