@@ -5,7 +5,7 @@ const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllOrdersByEmail: builder.query({
       query: (args) => {
-        console.log(args);
+        // console.log(args);
         const params = new URLSearchParams();
         if (args) {
           args.forEach((item: TQueryParams) => {
@@ -15,6 +15,23 @@ const orderApi = baseApi.injectEndpoints({
 
         return {
           url: `/product/orders/all-products`,
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["orderProduct"],
+    }),
+    getAllSuccessfullOrders: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return {
+          url: `/product/order/all-orders`,
           method: "GET",
           params: params,
         };
@@ -38,5 +55,6 @@ const orderApi = baseApi.injectEndpoints({
 });
 
 export const {
- useGetAllOrdersByEmailQuery
+ useGetAllOrdersByEmailQuery,
+ useGetAllSuccessfullOrdersQuery
 } = orderApi;

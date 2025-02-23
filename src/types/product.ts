@@ -32,3 +32,20 @@ export interface TProductResponse {
   };
   meta: any;
 }
+
+export interface TCustomerModal {
+  product: {
+    key:string;
+  name:string;
+  email:string;
+  isBlocked:boolean
+  }
+}
+
+export interface TUpdateProduct {
+  product:{key:string;
+  name:string;
+  price:number;
+  quantity:number;
+  category:string}
+}

@@ -7,14 +7,16 @@ import Loading from "../../components/loading/Loading";
 import {
   CheckOutlined,
   CloseOutlined,
-  DeleteOutlined,
+
   ExclamationCircleOutlined,
   LockOutlined,
   UnlockOutlined,
 } from "@ant-design/icons";
 import { TCustomerResponse, TUserDataType } from "../../types/user";
 import { useBlockUnblockCustomerMutation, useGetAllCustomersQuery } from "../../redux/features/customers/customer.api";
-import { TQueryParams } from "../../types/global";
+import { TCustomerModal} from "../../types/product";
+
+
 
 const AllCustomers = () => {
   const [page, setPage] = useState(1);
@@ -95,7 +97,7 @@ const AllCustomers = () => {
     <div>
       <div className=" mt-[100px] text-center">
         <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 drop-shadow-lg">
-          Product Lists
+          Customer Lists
         </h1>
         <div className="w-20 h-1 bg-indigo-500 mx-auto mt-3 rounded-full"></div>
       </div>
@@ -124,8 +126,9 @@ const AllCustomers = () => {
   );
 };
 
-const ConfirmDelete = ({ product }) => {
+const ConfirmDelete = ({ product}: TCustomerModal) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const [blockUnblockCustomer] = useBlockUnblockCustomerMutation();
 

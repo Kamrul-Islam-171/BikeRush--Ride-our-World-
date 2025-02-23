@@ -8,7 +8,8 @@ import {
 } from "../../redux/features/auth/AuthSlice";
 import { MenuOutlined } from "@ant-design/icons";
 import { VerifyToken } from "../../utils/verifyToken";
-import { TUserRole } from "../../layouts/SideBar";
+import { TUserRole } from "../../types/user";
+// import { TUserRole } from "../../layouts/SideBar";
 
 const NavBar = () => {
   const dispatch = useAppDispatch();

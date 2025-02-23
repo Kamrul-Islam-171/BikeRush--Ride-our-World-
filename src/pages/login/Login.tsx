@@ -2,7 +2,7 @@ import { Button } from "antd";
 import BSForm from "../../components/form/BSForm";
 import BSInput from "../../components/form/BSInput";
 import BSPassword from "../../components/form/BSPassword";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
@@ -16,10 +16,10 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const defaultValues = {
-        email: "ami@gmail.com",
-        password:"asdf1234"
-    }
+    // const defaultValues = {
+    //     email: "ami@gmail.com",
+    //     password:"asdf1234"
+    // }
     const onSubmit = async(data: FieldValues) => {
       const loginIn = toast.loading("Loggin in..."); 
       const logData = {
@@ -47,7 +47,7 @@ const Login = () => {
         <div className="bg-white p-8 rounded-lg shadow-lg">
           <h1 className="text-3xl font-semibold text-center mb-6 text-gray-600">Login</h1>
   
-          <BSForm onSubmit={onSubmit}  defaultValues={defaultValues}>
+          <BSForm onSubmit={onSubmit}  >
             <BSInput
               name="email"
               label="Email"
@@ -66,7 +66,10 @@ const Login = () => {
                 minLength: { value: 6, message: "Password must be at least 6 characters" }, // Minimum length for Password
               }}
             />
-            <div className="flex justify-end">
+            <div className="flex flex-col justify-between md:flex-row lg:flex-row gap-5">
+              <div>
+                Don't Have an Account? <NavLink to={'/register'} className="text-blue-500"> Register</NavLink>
+              </div>
               <Button
                 htmlType="submit"
                 type="primary"

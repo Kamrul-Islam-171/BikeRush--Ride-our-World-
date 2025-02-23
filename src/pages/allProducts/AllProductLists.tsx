@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useGetAllProductQuery } from "../../redux/features/products/product.api";
-import ProductCardWithAnimation from "./ProductCardWithAnimation";
 
-import { Input, Pagination, Select, Spin } from "antd";
+
+import { Input, Pagination, Select } from "antd";
 import type { GetProps } from "antd";
 import { TQueryParams } from "../../types/global";
 import { productItem } from "../../types/product";
@@ -34,7 +34,7 @@ const AllProducts = () => {
     { name: "page", value: page },
     {
       name: "limit",
-      value: 4,
+      value: 6,
     },
     ...(category ? [{ name: "category", value: category }] : []),
     ...(availability ? [{ name: "inStock", value: availability }] : []),

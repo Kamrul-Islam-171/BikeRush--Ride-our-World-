@@ -3,6 +3,7 @@ import AllProducts from "../pages/admin/AllProduct";
 import CreateNewProduct from "../pages/admin/CreateNewProduct";
 
 import AllOrders from "../pages/customar/AllOrders";
+import MangerOrders from './../pages/admin/MangerOrders';
 
 export const adminRoutes = [
   {
@@ -20,5 +21,9 @@ export const adminRoutes = [
   {
     path: "all-products",
     element: <AllProducts></AllProducts>,
+  },
+  {
+    path: "manage-orders",
+    element: <MangerOrders></MangerOrders> ,
   },
 ];

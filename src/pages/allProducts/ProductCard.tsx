@@ -1,10 +1,10 @@
 import { Card, Button } from "antd";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
-import { useState } from "react";
+
 
 const ProductCard = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const isInStock = true;
+  
+ 
   return (
     <div>
       <Card

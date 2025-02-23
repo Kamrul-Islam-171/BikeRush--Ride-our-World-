@@ -1,7 +1,7 @@
 import { Card, Button } from "antd";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 import { productItem } from "../../types/product";
-import { Link, NavLink } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 
 

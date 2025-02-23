@@ -1,52 +1,33 @@
-import { JwtPayload } from "jwt-decode";
-import Loading from "../../components/loading/Loading";
-import { selectCurrenttoken } from "../../redux/features/auth/AuthSlice";
-import { useAppSelector } from "../../redux/features/hook";
-import { useGetAllOrdersByEmailQuery } from "../../redux/features/orders/order.api";
-import { VerifyToken } from "../../utils/verifyToken";
 import { useState } from "react";
+import { useGetAllSuccessfullOrdersQuery } from "../../redux/features/orders/order.api";
+import { TOrderResponse, TOrdersProType } from "../../types/user";
+import Loading from "../../components/loading/Loading";
 import { Pagination, Space, Table, TableProps, Tag } from "antd";
-import {  TOrderResponse, TOrdersProType } from "../../types/user";
 
-interface CustomJwtPayload extends JwtPayload {
-  email?: string;
-}
-
-const MyOrders = () => {
+const MangerOrders = () => {
   const [page, setPage] = useState(1);
-  let user: CustomJwtPayload | null = null;
-  const token = useAppSelector(selectCurrenttoken);
-  if (token) {
-    user = VerifyToken(token) as CustomJwtPayload;
-  }
-  const { data: myOrders, isFetching } = useGetAllOrdersByEmailQuery([
-    {
-      name: "email",
-      value: user?.email,
-    },
+  const { data: allOrders, isFetching } = useGetAllSuccessfullOrdersQuery([
     { name: "page", value: page },
     {
       name: "limit",
       value: 6,
     },
   ]);
-  const orderData = (myOrders as TOrderResponse)?.data?.result;
-  const meta = myOrders?.data?.meta;
-//   console.log(orderData, meta);
+  //   console.log(allOrders);
 
-  if (isFetching) {
-    return <Loading />;
-  }
+  const orderData = (allOrders as TOrderResponse)?.data?.result;
+  const meta = allOrders?.data?.meta;
+  console.log(orderData)
 
   const tableData = orderData?.map(
-    ({ _id, name, email, product, amount,delivered }) => ({
+    ({ _id, name, email, product, amount, delivered }) => ({
       key: _id,
       name,
       email,
-      productName:product?.name,
-      productImage:product?.image,
+      productName: product?.name,
+      productImage: product?.image,
       amount,
-      delivered
+      delivered,
     })
   );
   const columns: TableProps<TOrdersProType>["columns"] = [
@@ -63,18 +44,18 @@ const MyOrders = () => {
       render: (item) => {
         // console.log({item})
         return (
-            <Space className="h-[50px] w-[50px] ">
-                <img src={item} className="object-cover rounded-md"></img>
-            </Space>
-        )
-      }
+          <Space className="h-[50px] w-[50px] ">
+            <img src={item} className="object-cover rounded-md"></img>
+          </Space>
+        );
+      },
     },
     {
-        title: "Price",
-        dataIndex: "amount",
-        key: "amount",
-        render: (text) => <a className="hover:text-indigo-500">${text}</a>,
-      },
+      title: "Price",
+      dataIndex: "amount",
+      key: "amount",
+      render: (text) => <a className="hover:text-indigo-500">${text}</a>,
+    },
     {
       title: "Status",
       //   dataIndex: "isBlocked",
@@ -82,7 +63,7 @@ const MyOrders = () => {
       render: (item) => {
         // console.log(item.delivered)
         let tagColor;
-        if (item.delivered ==='Pending') {
+        if (item.delivered === "Pending") {
           tagColor = "blue";
         } else {
           tagColor = "green";
@@ -98,14 +79,13 @@ const MyOrders = () => {
         );
       },
     },
-
-    
   ];
-  // console.log(myOrders)
 
+  if (isFetching) {
+    return <Loading />;
+  }
   return (
-
-<div>
+    <div>
       <div className=" mt-[100px] text-center">
         <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 drop-shadow-lg">
           My Orders
@@ -134,8 +114,7 @@ const MyOrders = () => {
         ></Pagination>
       </div>
     </div>
-
   );
 };
 
-export default MyOrders;
+export default MangerOrders;

@@ -1,10 +1,10 @@
-import { Button, Modal, Pagination, Space, Table, TableProps, Tag } from "antd";
+import { Button, Modal, Pagination, Space, Table, TableProps } from "antd";
 import {
   useDeleteProductMutation,
   useGetAllProductQuery,
   useUpdateProductMutation,
 } from "../../redux/features/products/product.api";
-import { DataType, TProductResponse } from "../../types/product";
+import { DataType, TProductResponse, TUpdateProduct } from "../../types/product";
 import { useState } from "react";
 
 import BSForm from "../../components/form/BSForm";
@@ -17,6 +17,7 @@ import {
   DeleteOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
+import { FieldValues } from "react-hook-form";
 
 
 const AllProducts = () => {
@@ -116,9 +117,10 @@ const AllProducts = () => {
   );
 };
 
-const UpdateProductModal = ({ product }) => {
+const UpdateProductModal = ({ product }: TUpdateProduct) => {
   const [productUpdate] = useUpdateProductMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log("up = ", product)
   const defaultValues = {
     price: product?.price,
     quantity: product?.quantity,
@@ -130,8 +132,9 @@ const UpdateProductModal = ({ product }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (data : FieldValues) => {
     const toastId = toast.loading("Loading...");
+    // console.log("dat=",data)
     // console.log(data);
     try {
       
@@ -207,9 +210,10 @@ const UpdateProductModal = ({ product }) => {
   );
 };
 
-const ConfirmDelete = ({ product }) => {
+const ConfirmDelete = ({ product } : TUpdateProduct) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteProduct] = useDeleteProductMutation();
+  // console.log("pro = ", product)
 
   const showModal = () => {
     setIsModalOpen(true);

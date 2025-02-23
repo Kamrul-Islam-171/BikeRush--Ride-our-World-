@@ -1,5 +1,5 @@
 
-import { Layout, Menu, theme } from "antd";
+import { Layout, Menu} from "antd";
 
 import { Outlet } from "react-router-dom";
 import { CustomarSidebarItems } from "../routes/customerSidebarRoutesItems";

@@ -16,7 +16,7 @@ const BSInput = ({ name, label, type, disabled, rules, accept }: TInputProps) =>
       <Controller
         name={name}
         rules={rules}
-        render={({ field: { onChange, value, ...field }, fieldState: { error } }) => (
+        render={({ field: { onChange, value}, fieldState: { error } }) => (
           <Form.Item label={label} labelCol={{ span: 6 }}>
             {type === "file" ? (
               <input

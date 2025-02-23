@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import About from "../pages/about/About";
 import AllProducts from "../pages/allProducts/AllProductLists";
 import HomeContent from "../pages/home/HomeContent";
@@ -7,9 +7,7 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import SideBar from "../layouts/SideBar";
 
-import { useAppSelector } from "../redux/features/hook";
-import { VerifyToken } from "../utils/verifyToken";
-import { selectCurrenttoken } from "../redux/features/auth/AuthSlice";
+
 import { customerRoutes } from "./customer.routes";
 import { adminRoutes } from "./admin.routes";
 import ProtextedRoute from "../layouts/ProtextedRoute";
@@ -19,14 +17,14 @@ import Success from "../pages/allProducts/Success";
 import Failed from "../pages/allProducts/Failed";
 import Cancel from "../pages/allProducts/Cancel";
 
-let user;
-const DashboardRoutes = () => {
-  const token = useAppSelector(selectCurrenttoken);
-  user = token ? VerifyToken(token) : null;
-  console.log(user);
+// let user;
+// const DashboardRoutes = () => {
+//   const token = useAppSelector(selectCurrenttoken);
+//   user = token ? VerifyToken(token) : null;
+//   console.log(user);
 
-  return <SideBar></SideBar>;
-};
+//   return <SideBar></SideBar>;
+// };
 
 export const router = createBrowserRouter([
   {

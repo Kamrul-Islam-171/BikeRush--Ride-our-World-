@@ -1,16 +1,25 @@
 import React from "react";
 import {
   HomeOutlined,
-  UserOutlined,
-  CheckCircleOutlined,
   ProductOutlined,
   PlusCircleOutlined,
   DatabaseOutlined,
   TeamOutlined,
+  PoweroffOutlined,
+  StockOutlined,
+
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../redux/features/hook";
+
+import { logOut } from "../redux/features/auth/AuthSlice";
 
 export const AdminSidebarItems = (role: string) => {
+  const dispatch = useAppDispatch();
+  const handleLogOut = () => {
+    dispatch(logOut())
+  }
   const adminRoutesItems = [
     {
       key: "Logo",
@@ -20,6 +29,11 @@ export const AdminSidebarItems = (role: string) => {
          BikeRush
         </NavLink>
       ),
+    },
+    {
+      key: "Over View",
+      icon: <StockOutlined />,
+      label: <NavLink to={`/${role}`}>Over View</NavLink>,
     },
     // {
     //   key: "My Orders",
@@ -66,9 +80,31 @@ export const AdminSidebarItems = (role: string) => {
       label: <NavLink to={`all-customers`}>All Customers</NavLink>,
     },
     {
+      key: "Managea Orders",
+      icon: <ShoppingCartOutlined />,
+      label: <NavLink to={`manage-orders`}>Manage Orders</NavLink>,
+    },
+    {
       key: "Home",
       icon: React.createElement(HomeOutlined),
       label: <NavLink to={`/`}>Home</NavLink>,
+    },
+    // {
+    //   key: "LogOut",
+    //   // icon: React.createElement(HomeOutlined),
+    //   label: <Button className="w-full bg-indigo-600 border-0 hover:bg-indigo-500 text-white transition duration-300 " onClick={handleLogOut}>Logout</Button>
+    // },
+    {
+      key: "LogOut",
+      icon: React.createElement(PoweroffOutlined),
+      label: (
+        <span
+          className=" transition duration-300"
+          onClick={handleLogOut}
+        >
+          Logout
+        </span>
+      ),
     },
   ];
   return adminRoutesItems;
