@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# BikeRush - Role-Based E-commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚴 About BikeRush
+**BikeRush** is a robust and secure e-commerce platform built for bike enthusiasts. This web application follows a **role-based** access system, allowing **admins** to manage the platform efficiently while providing **customers** with a seamless shopping experience.
 
-Currently, two official plugins are available:
+live Link : https://bikerushdotcom.web.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+### 🔹 **Admin Features**
+- Manage products (add, update, delete).
+- Manage users (block/unblock users).
+- Manage customer orders.
+- View sales analytics and order statistics.
 
-## Expanding the ESLint configuration
+### 🔹 **Customer Features**
+- Browse and search for bikes and accessories.
+- Apply filters for refined product selection.
+- Place orders and track order history.
+- Secure authentication and profile management.
+- Payment options for smooth transactions.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ Tech Stack
+- **Frontend:** React, Tailwind CSS, Ant Design
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **State Management:** Redux Toolkit
+- **Authentication:** JWT-based authentication
+- **Payment Gateway:** SSLCommerz
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🚀 Getting Started
+### 🔧 Prerequisites
+Ensure you have the following installed:
+- Node.js & npm/yarn
+- MongoDB (local or cloud instance)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### 🔹 Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Kamrul-Islam-171/bike-store-front-end-L2--A4-
+   cd bike-store-front-end-L2--A4
+2. Install dependencies:
+   ```sh
+   npm install
+3. Run the development server:
+   ```sh
+   npm run dev
+4. Access the application at http://localhost:5173.
