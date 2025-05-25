@@ -7,14 +7,14 @@ const { Title, Paragraph } = Typography;
 
 const About = () => {
     return (
-        <div className="p-6 max-w-4xl mx-auto">
+        <div className="p-6 max-w-4xl mx-auto mt-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <Title level={2} className="text-blue-600">Welcome to Bike Rush</Title>
+          <Title level={2} className="text-4xl font-bold text-gray-900">Welcome to Bike Rush</Title>
           <Paragraph className="text-gray-700 text-lg">
             Your one-stop destination for high-quality bikes, designed for every terrain and rider.
           </Paragraph>

@@ -21,9 +21,9 @@ const blogs = [
 
 const Blogs = () => {
   return (
-    <div className="mt-14">
+    <div className="mt-14 py-16 ">
       <section>
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold container mx-auto text-center mb-8">
           Latest from Our Bike Blog
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

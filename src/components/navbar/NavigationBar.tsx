@@ -24,6 +24,7 @@ const NavigationBar = () => {
 
   const handleLogOut = () => {
     dispatch(logOut());
+    navigate('/login')
   };
 
   const showDrawer = () => {
@@ -35,8 +36,9 @@ const NavigationBar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-gray-900 text-white p-4 shadow-md">
-      <div className="flex items-center gap-1">
+    <div className="bg-gray-900 text-white fixed w-full  top-0 z-50 px-4 lg:px-0">
+    <nav className="container mx-auto  flex items-center justify-between   py-4 shadow-md">
+      <div className="flex items-center gap-1 ">
         <div className="w-[40px] h-[40px]">
         <img src="https://res.cloudinary.com/dtp5fwvg9/image/upload/v1739806738/bikerush_evxj9d.png" alt="" />
         </div>
@@ -51,7 +53,7 @@ const NavigationBar = () => {
       </div>
 
       <ul className="hidden md:flex space-x-6">
-        {["Home", "All Products", "About"].map((item, index) => (
+        {["Home", "All Products", "About", "Service"].map((item, index) => (
           <li key={index}>
             <NavLink
               to={
@@ -85,10 +87,10 @@ const NavigationBar = () => {
         )}
       </ul>
 
-      <div className="hidden md:flex space-x-4">
+      <div className="hidden md:flex space-x-4 ">
         {!token && (
           <Button
-            className="bg-indigo-600 hover:bg-indigo-500 text-white transition duration-300"
+            className="bg-indigo-600 border-0 hover:bg-indigo-500 text-white transition duration-300"
             onClick={() => navigate("/login")}
           >
             Login
@@ -96,7 +98,7 @@ const NavigationBar = () => {
         )}
         {!token && (
           <Button
-            className="bg-gray-700 hover:bg-gray-600 text-white transition duration-300"
+            className="bg-gray-700 border-0 hover:bg-gray-600 text-white transition duration-300"
             onClick={() => navigate("/register")}
           >
             Register
@@ -104,7 +106,7 @@ const NavigationBar = () => {
         )}
         {token && (
           <Button
-            className="bg-indigo-600 hover:bg-indigo-500 text-white transition duration-300"
+            className="bg-indigo-600 hover:bg-indigo-500 border-0 text-white transition duration-300"
             onClick={handleLogOut}
           >
             LogOut
@@ -183,6 +185,7 @@ const NavigationBar = () => {
         </div>
       </Drawer>
     </nav>
+    </div>
   );
 };
 

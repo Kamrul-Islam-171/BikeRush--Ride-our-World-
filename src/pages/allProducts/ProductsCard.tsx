@@ -1,5 +1,5 @@
 import { Card, Button } from "antd";
-import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 import { productItem } from "../../types/product";
 import { Link} from "react-router-dom";
 
@@ -12,9 +12,9 @@ interface TproductItemProps {
 const ProductsCard = ({ product} : TproductItemProps) => {
   const { name, price, inStock, image, category, _id } = product;
   const isInStock = inStock;
-  const filteredField = {
-    id: _id, name, image, price
-  }
+  // const filteredField = {
+  //   id: _id, name, image, price
+  // }
 
   return (
     <div className="relative w-full max-w-xs md:max-w-sm rounded-2xl">
@@ -51,14 +51,14 @@ const ProductsCard = ({ product} : TproductItemProps) => {
 
           {/* Buttons Row - Adjust for Small Devices */}
           <div className="flex flex-col sm:flex-row gap-3 mt-4">
-            <Button
+            {/* <Button
               type="primary"
               icon={<ShoppingCartOutlined />}
               className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium shadow-md"
               disabled={product?.quantity <= 0} // Disable if out of stock
             >
               <Link to={'/customer/checkout'} state={{product:filteredField}}>Buy Now</Link>
-            </Button>
+            </Button> */}
 
             <Button
               type="default"

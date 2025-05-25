@@ -16,6 +16,7 @@ import CheckOut from "../pages/allProducts/CheckOut";
 import Success from "../pages/allProducts/Success";
 import Failed from "../pages/allProducts/Failed";
 import Cancel from "../pages/allProducts/Cancel";
+import Service from "../pages/service/Service";
 
 // let user;
 // const DashboardRoutes = () => {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "about",
         element: <About></About>,
+      },
+      {
+        path: "service",
+        element: <Service></Service>,
       },
       {
         path: "/product/:id",
